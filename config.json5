@@ -1,5 +1,6 @@
 {
-    "path": "A:\\Diags\\server",
-    "workingDir": "A:\\Diags\\server",
-    "runCommand": "python server.py"
+    "name": "Diags Client",
+    "path": "A:\\Diags\\client",
+    "workingDir": "A:\\Diags\\client",
+    "runCommand": "go run ."
 }

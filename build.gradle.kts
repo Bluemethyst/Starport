@@ -13,6 +13,9 @@ repositories {
 dependencies {
     testImplementation(kotlin("test"))
     implementation("io.github.xn32:json5k:0.3.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0")
+    implementation("com.lordcodes.turtle:turtle:0.10.0")
+
 }
 
 tasks.test {
