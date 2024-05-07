@@ -1,19 +1,25 @@
 package dev.bluemethyst.starport.script
 
-import com.lordcodes.turtle.ShellLocation
-import com.lordcodes.turtle.shellRun
 import dev.bluemethyst.starport.data.Config
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import java.io.BufferedReader
 import java.io.File
+import java.io.InputStreamReader
 
 class ScriptManager {
     private val runningScripts: MutableMap<String, Process> = mutableMapOf()
 
     fun startScript(config: Config) = runBlocking {
         launch {
-            val cwd = ShellLocation.HOME.resolve(config.workingDir)
-            val process = shellRun(config.runCommand)
+            val process = ProcessBuilder(config.runCommand, config.args)
+                .directory(File(config.workingDir))
+                .start()
+            val reader = BufferedReader(InputStreamReader(process.inputStream))
+            reader.lines().forEach { line -> println(line) }
+            val errorReader = BufferedReader(InputStreamReader(process.errorStream))
+            errorReader.lines().forEach { line -> println(line) }
+            process.waitFor()
         }
     }
 

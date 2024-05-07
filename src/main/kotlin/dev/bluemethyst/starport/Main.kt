@@ -7,15 +7,14 @@ import io.github.xn32.json5k.Json5
 import kotlinx.serialization.decodeFromString
 
 fun main() {
-    val configFilePath = "A:\\Starport\\config.json5"
+    val configFilePath = "config.json5"
     val config: Config = Json5.decodeFromString<Config>(File(configFilePath).readText())
 
     val scriptManager = ScriptManager()
     scriptManager.startScript(config)
     scriptManager.monitorScript(config.name)
 
-    Thread.sleep(5000)
-    scriptManager.monitorScript(config.name)
-    scriptManager.stopScript(config.name)
-    scriptManager.monitorScript(config.name)
+    Runtime.getRuntime().addShutdownHook(Thread {
+        scriptManager.stopScript(config.name)
+    })
 }
