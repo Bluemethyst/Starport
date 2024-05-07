@@ -1,5 +1,5 @@
 {
-    "name": "Diags Client",
+    "name": "Diags Clients",
     "path": "A:\\Diags\\client",
     "workingDir": "A:\\Diags\\client",
     "runCommand": "go run ."
